@@ -1,8 +1,8 @@
 import React from 'react';
 import { ArrowRight, Star } from 'lucide-react';
 import DownloadButton from './DownloadButton';
-import HomeImage from '../assets/Home.png';
-import TasksImage from '../assets/Tasks.png';
+import HomeImage from '../Assets/Home.png';
+import TasksImage from '../Assets/Tasks.png';
 
 const Hero = () => {
   return (
