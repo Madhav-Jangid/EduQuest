@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light';
 
 interface ThemeContextType {
   theme: Theme;
@@ -22,33 +22,20 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  // Always light theme
+  const theme: Theme = 'light';
 
-  useEffect(() => {
-    // Check for user preference in localStorage
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
-    }
-  }, []);
-
-  useEffect(() => {
-    // Update HTML class for theme
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
+  // Toggle does nothing
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    console.log('Theme is always light');
   };
+
+  // Ensure HTML class is 'light'
+  React.useEffect(() => {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light'); // Optional
+    localStorage.setItem('theme', 'light'); // Optional
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
